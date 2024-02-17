@@ -3,6 +3,8 @@
 \ mode
 \ chgport
 
+\ local note: PC Bidmead has the KMTronic relay box on COM6
+
  include C:\MPE\VfxForth\lib\Win32\Genio\serialbuff.fth
 \ this does not include properly in Win64
 
@@ -32,7 +34,8 @@
  \ protocol binary string of 3 bytes
  
 : add-relays ( com_port --)
-	9600 ( com_port baud) connection_string 7 COM_KMT ( c-addr u attribs sid) open-gio ( sid ior) ABORT" Failed to open KMTronic COM port"
+	9600 ( com_port baud) connection_string 7 COM_KMT ( c-addr u attribs sid) open-gio ( sid ior) 
+	ABORT" Failed to open KMTronic COM port" drop
 ;
 
 : remove-relays 
@@ -42,8 +45,8 @@
 : switch-relay ( f r --)
 \ f = -1 on; 0 off
 \ r = relay number
-	KMTronic_protocol 1 + swap c!
-	KMTronic_protocol 2 + if 1 else 0 then swap c!
+	KMTronic_protocol 1 + c!
+	if 1 else 0 then KMTronic_protocol 2 + c!
 	KMTronic_protocol 3 COM_KMT ( addr n sid) write-gio ( ior) ABORT" Failed to write KMTronic COM port"
 ;
 
