@@ -6,7 +6,7 @@ include "%idir%\KMTronic.f"
 	COM-KMTronic add-relays
 
 	1 relay-on
-	2000 us
+	2000 ms
 	1 relay-off
 
 	remove-relays
