@@ -1,12 +1,18 @@
+include "%idir%\..\ForthBase\ForthBase.f"
+include "%idir%\..\ForthBase\serial\VFX32serial.f"
+include "%idir%\KMTronic_Bidmead.f"
 include "%idir%\KMTronic.f"
 
 	CR
-	6 constant COM-KMTronic
+	scan-relays
+	COM_KMT add-relays
 
-	COM-KMTronic add-relays
-
-	1 relay-on
+	3 relay-on
+	CR ." ON"
 	2000 ms
-	1 relay-off
+	
+	3 relay-off
+	CR ." OFF"
 
 	remove-relays
+	CR

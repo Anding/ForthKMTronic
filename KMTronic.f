@@ -21,7 +21,7 @@
 \ r = relay number
 	KMTronic_protocol 1 + c!
 	if 1 else 0 then KMTronic_protocol 2 + c!
-	KMTronic_protocol 3 COM_KMT ( addr n sid) write-gio ( ior) ABORT" Failed to write KMTronic COM port"
+	KMTronic_protocol 3 sid_KMTronic ( addr n sid) write-gio ( ior) ABORT" Failed to write KMTronic COM port"
 ;
 
 : relay-on ( r --)
