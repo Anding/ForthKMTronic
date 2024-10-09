@@ -1,11 +1,14 @@
 \ Use the serial port (COM) functionality of VFX Forth to communicate with a KMTronic USB Relay controller
-\ requires VFX32serial.f
+NEED serial
+
+\ COM port number, to revise on the local machine
+	6 value KMTronic.COM
 
 \ prepare an instance of a VFX Forth generic I/O driver
- serdev: sid_KMTronic
+	serdev: sid_KMTronic
 
-: add-relays ( com_port --)
-	9600 sid_KMTronic ( com_port baud) open-serial
+: add-relays ( --)
+	KMTronic.COM 9600 sid_KMTronic ( com_port baud) open-serial
 ;
 
 : remove-relays 
@@ -25,11 +28,11 @@
 ;
 
 : relay-on ( r --)
- -1 swap switch-relay
+	-1 swap switch-relay
 ;
 
 : relay-off ( r --)
- 0 swap switch-relay
+	0 swap switch-relay
 ;
 
 

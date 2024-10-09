@@ -1,11 +1,10 @@
-include "%idir%\..\ForthBase\ForthBase.f"
-include "%idir%\..\ForthBase\serial\VFX32serial.f"
-include "%idir%\KMTronic_Bidmead.f"
+\ test for KMTronic.f
+
+include "%idir%\..\ForthBase\libraries\libraries.f"
 include "%idir%\KMTronic.f"
 
 	CR
-	scan-relays
-	COM_KMT add-relays
+	add-relays
 
 	3 relay-on
 	CR ." ON"
