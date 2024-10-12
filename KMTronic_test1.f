@@ -6,10 +6,11 @@ include "%idir%\KMTronic.f"
 	CR
 	add-relays
 
+	2000 ms
 	3 relay-on
 	CR ." ON"
-	2000 ms
 	
+	2000 ms
 	3 relay-off
 	CR ." OFF"
 
