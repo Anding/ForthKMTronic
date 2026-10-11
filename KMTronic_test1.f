@@ -1,18 +1,17 @@
-\ test for KMTronic.f
+\ Live camera-power relay cycle. Configure KMTronic.COM before invocation.
+\ The parallel web relay must be off.
 
 include "%idir%\..\ForthBase\libraries\libraries.f"
 include "%idir%\KMTronic.f"
 
-	CR
+: test-camera-power-relay ( -- )
+	KMTronic.COM 0= ABORT" Configure KMTronic.COM before running this test"
 	add-relays
-
-	2000 ms
-	3 relay-on
-	CR ." ON"
-	
-	2000 ms
-	3 relay-off
-	CR ." OFF"
-
+	1 relay-off
+	500 ms
+	1 relay-on
+	500 ms
+	1 relay-off
+	500 ms
 	remove-relays
-	CR
+;
