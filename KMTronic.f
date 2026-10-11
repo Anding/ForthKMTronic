@@ -1,6 +1,5 @@
 \ Use VFX Forth serial I/O to control a KMTronic USB relay box.
 NEED serial
-NEED CommandStrings
 
 \ COM port number supplied by the observing environment
 	0 value KMTronic.COM
@@ -19,10 +18,13 @@ NEED CommandStrings
 
 create KMTronic.command 3 allot
 
-: switch-relay ( flag relay -- )
+: switch-relay { flag relay -- }
 \ Switch one relay; valid relay numbers are 1 through 4.
-	dup 1 5 within 0= ABORT" KMTronic relay must be 1 through 4"
-	KMTronic.command << 0xff | ( r) | ( f) if 1 else 0 then | >>
+	relay 1 5 within 0= ABORT" KMTronic relay must be 1 through 4"
+	0xff KMTronic.command c!
+	relay KMTronic.command 1+ c!
+	flag if 1 else 0 then KMTronic.command 2 + c!
+	KMTronic.command 3
 	KMTronic.sid write-gio ABORT" Failed to write KMTronic COM port"
 ;
 
