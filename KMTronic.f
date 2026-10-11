@@ -1,4 +1,6 @@
 \ Use VFX Forth serial I/O to control a KMTronic USB relay box.
+\ Maintenance: the wire packet is exactly FF, relay, state.  Keep COM policy
+\ outside this driver and never alter relays other than the requested one.
 NEED serial
 
 \ COM port number supplied by the observing environment

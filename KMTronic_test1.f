@@ -1,5 +1,8 @@
 \ Live camera-power relay cycle. Configure KMTronic.COM before invocation.
 \ The parallel web relay must be off.
+\
+\ Maintenance: this deliberately leaves relay 1 off; do not run while the
+\ camera must remain powered or while the web relay masks USB relay changes.
 
 include "%idir%\..\ForthBase\libraries\libraries.f"
 include "%idir%\KMTronic.f"
