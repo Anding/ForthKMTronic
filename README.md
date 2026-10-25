@@ -19,6 +19,11 @@ Relay numbers are validated from 1 through 4. `relay-on` and `relay-off` send
 one command and do not impose a transition delay; the calling equipment
 lifecycle owns that policy.
 
+Invalid configuration, invalid relay numbers and write failures report and
+return normally. An invalid relay number sends no command.
+`KMTronic_test1.f` checks invalid input without accessing hardware; its
+`test-camera-power-relay` word remains an explicitly invoked live example.
+
 AstroImagingInForth sets the Morbius COM port in `environments\DB-E160.f`.
 In that installation relay 1 controls the camera 12 V supply. A web relay is
 wired in parallel, so the circuit is on when either controller is on. Turning

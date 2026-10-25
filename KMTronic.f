@@ -10,7 +10,7 @@ NEED serial
 	serdev: KMTronic.sid
 
 : add-relays ( -- )
-	KMTronic.COM 0= ABORT" KMTronic COM port is not configured"
+	KMTronic.COM 0= if cr ." KMTronic COM port is not configured" cr exit then
 	KMTronic.COM 9600 ( com_port baud) KMTronic.sid open-serial
 ;
 
@@ -22,12 +22,12 @@ create KMTronic.command 3 allot
 
 : switch-relay { flag relay -- }
 \ Switch one relay; valid relay numbers are 1 through 4.
-	relay 1 5 within 0= ABORT" KMTronic relay must be 1 through 4"
+	relay 1 5 within 0= if cr ." KMTronic relay must be 1 through 4" cr exit then
 	0xff KMTronic.command c!
 	relay KMTronic.command 1+ c!
 	flag if 1 else 0 then KMTronic.command 2 + c!
 	KMTronic.command 3
-	KMTronic.sid write-gio ABORT" Failed to write KMTronic COM port"
+	KMTronic.sid write-gio .throw
 ;
 
 : relay-on ( relay -- )
